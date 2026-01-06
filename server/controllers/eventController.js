@@ -85,18 +85,18 @@ exports.getEventsByUser = async (req, res) => {
       const events = await Event.find({
         profiles: userId,
       }).populate("profiles", "name");
-  
- 
+
       const formattedEvents = events.map((event) => ({
         _id: event._id,
         title: event.title,
         profiles: event.profiles,
-        startDateTime: fromUTC(event.startUTC, user.timezone),
-        endDateTime: fromUTC(event.endUTC, user.timezone),
-        createdAt: fromUTC(event.createdAt, user.timezone),
-        updatedAt: fromUTC(event.updatedAt, user.timezone),
+        eventTimezone: event.eventTimezone,
+        startUTC: event.startUTC,
+        endUTC: event.endUTC,
+        createdAtUTC: event.createdAt,
+        updatedAtUTC: event.updatedAt,
       }));
-  
+
       res.status(200).json(formattedEvents);
     } catch (error) {
       res.status(500).json({
@@ -206,28 +206,34 @@ exports.getEventsByUser = async (req, res) => {
   
 
 exports.getEventLogs = async (req, res) => {
-    try {
-      const { eventId, userTimezone } = req.query;
-  
-      if (!eventId || !userTimezone) {
-        return res.status(400).json({
-          message: "eventId and userTimezone are required",
-        });
-      }
-  
-      const logs = await EventLog.find({ eventId }).sort({ createdAt: -1 });
-  
-      const formattedLogs = logs.map((log) => ({
-        message: log.message,
-        timestamp: fromUTC(log.createdAt, userTimezone),
-      }));
-  
-      res.status(200).json(formattedLogs);
-    } catch (error) {
-      res.status(500).json({
-        message: "Failed to fetch logs",
-        error: error.message,
+  try {
+    const { eventId, userTimezone } = req.query;
+
+    if (!eventId || !userTimezone) {
+      return res.status(400).json({
+        message: "eventId and userTimezone are required",
       });
     }
-  };
-  
+
+    const logs = await EventLog.find({ eventId })
+      .sort({ changedAtUTC: -1 })
+      .populate("changedBy", "name");
+
+    const formattedLogs = logs.map((log) => ({
+      _id: log._id,
+      timestamp: fromUTC(log.changedAtUTC, userTimezone),
+      changedBy: log.changedBy
+        ? { _id: log.changedBy._id, name: log.changedBy.name }
+        : null,
+      oldValues: log.oldValues,
+      newValues: log.newValues,
+    }));
+
+    res.status(200).json(formattedLogs);
+  } catch (error) {
+    res.status(500).json({
+      message: "Failed to fetch logs",
+      error: error.message,
+    });
+  }
+};
