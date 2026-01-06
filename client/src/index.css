@@ -20,6 +20,12 @@ body {
   min-height: 100vh;
 }
 
+#root {
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f1e8 0%, #faf8f3 50%, #f0ede4 100%);
+}
+
 a {
   color: inherit;
   text-decoration: none;

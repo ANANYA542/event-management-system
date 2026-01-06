@@ -1,0 +1,14 @@
+/* ProfileSelector Styles */
+.profile-selector {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 260px;
+}
+
+@media (max-width: 1080px) {
+  .profile-selector {
+    width: 100%;
+  }
+}
+

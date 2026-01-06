@@ -1,0 +1,75 @@
+/* LogsModal Styles */
+.logs-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.log-card {
+  border: 1px solid rgba(168, 213, 186, 0.3);
+  border-radius: 10px;
+  padding: 12px 14px;
+  background: #fefcf9;
+}
+
+.log-content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.log-content strong {
+  color: #101828;
+  font-size: 14px;
+}
+
+.log-content p {
+  margin: 0;
+  font-size: 13px;
+}
+
+.log-diffs {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.log-diff-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.log-diff-row strong {
+  font-size: 13px;
+  color: #101828;
+}
+
+.log-diff-values {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.tag {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 12px;
+  background: #f3f4f6;
+  color: #101828;
+  border: 1px solid rgba(168, 213, 186, 0.4);
+}
+
+.tag-green {
+  background: rgba(168, 213, 186, 0.2);
+  color: #2d5a3d;
+  border-color: rgba(168, 213, 186, 0.5);
+}
+
+.log-arrow {
+  color: rgba(168, 213, 186, 0.6);
+  font-size: 14px;
+}
+
