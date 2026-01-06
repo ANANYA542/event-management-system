@@ -354,7 +354,7 @@ function App() {
             <div className="log-diff-values">
               <Tag>{change.from || "—"}</Tag>
               <span className="log-arrow">→</span>
-              <Tag color="purple">{change.to || "—"}</Tag>
+              <Tag color="green">{change.to || "—"}</Tag>
             </div>
           </div>
         ))}

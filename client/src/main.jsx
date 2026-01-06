@@ -13,7 +13,7 @@ createRoot(document.getElementById("root")).render(
       <ConfigProvider
         theme={{
           token: {
-            colorPrimary: "#5b3cc4",
+            colorPrimary: "#a8d5ba",
             borderRadius: 8,
             fontFamily: "Inter, system-ui, -apple-system, sans-serif",
           },
