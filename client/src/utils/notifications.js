@@ -1,4 +1,4 @@
-// Simple notification system to replace antd message
+
 let notificationContainer = null;
 
 const createNotificationContainer = () => {

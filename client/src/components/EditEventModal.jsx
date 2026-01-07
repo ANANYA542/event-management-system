@@ -3,7 +3,7 @@ import dayjs from "../lib/dayjs";
 import { ClockIcon } from "./Icons";
 import { TIMEZONE_OPTIONS } from "../constants/timezones";
 import "../styles/modal.css";
-import "../styles/EditEventModal.css";
+
 
 const EditEventModal = ({
   event,

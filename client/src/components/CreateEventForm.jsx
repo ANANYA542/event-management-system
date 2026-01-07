@@ -2,15 +2,9 @@ import { useState, useEffect } from "react";
 import dayjs from "../lib/dayjs";
 import { PlusIcon, ClockIcon } from "./Icons";
 import { DEFAULT_TIMEZONE, TIMEZONE_OPTIONS } from "../constants/timezones";
-import "../styles/CreateEventForm.css";
 
-const CreateEventForm = ({
-  users,
-  formTitle,
-  setFormTitle,
-  formProfiles,
-  setFormProfiles,
-  formTimezone,
+
+const CreateEventForm = ({users,formTitle,setFormTitle,formProfiles,setFormProfiles,formTimezone,
   setFormTimezone,
   startAt,
   setStartAt,
