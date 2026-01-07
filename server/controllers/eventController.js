@@ -128,14 +128,14 @@ exports.getEventsByUser = async (req, res) => {
         return res.status(404).json({ message: "Event not found" });
       }
   
-      // 🔐 Authorization: only assigned users can update
+     
       if (!event.profiles.map(String).includes(actingUserId)) {
         return res.status(403).json({
           message: "You are not allowed to update this event",
         });
       }
   
-      // 📌 Capture old values (BEFORE update)
+
       const oldValues = {
         profiles: [...event.profiles],
         eventTimezone: event.eventTimezone,
@@ -145,25 +145,24 @@ exports.getEventsByUser = async (req, res) => {
   
       let updated = false;
   
-      // Update profiles
+     
       if (profiles) {
         event.profiles = profiles;
         updated = true;
       }
   
-      // Update timezone
       if (eventTimezone) {
         event.eventTimezone = eventTimezone;
         updated = true;
       }
   
-      // Update start time
+      
       if (startDateTime) {
         event.startUTC = toUTC(startDateTime, event.eventTimezone);
         updated = true;
       }
   
-      // Update end time
+      
       if (endDateTime) {
         event.endUTC = toUTC(endDateTime, event.eventTimezone);
         updated = true;
@@ -175,9 +174,8 @@ exports.getEventsByUser = async (req, res) => {
         });
       }
   
-      await event.save(); // 💾 persist changes
-  
-      // 📌 Capture new values (AFTER update)
+      await event.save(); 
+
       const newValues = {
         profiles: [...event.profiles],
         eventTimezone: event.eventTimezone,
@@ -185,7 +183,6 @@ exports.getEventsByUser = async (req, res) => {
         endUTC: event.endUTC,
       };
   
-      // 📝 Create log entry
       await EventLog.create({
         eventId: event._id,
         changedBy: actingUserId,
